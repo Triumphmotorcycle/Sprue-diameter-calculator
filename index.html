@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprue Diameter Calculator</title>
+    <script>
+        // Function to calculate sprue diameter
+        function calculateSprueDiameter() {
+            // Get input values
+            var diameter = parseFloat(document.getElementById("diameterInput").value);
+            var thickness = parseFloat(document.getElementById("thicknessInput").value);
+            var constant = parseFloat(document.getElementById("constantInput").value);
+            
+            // Check if inputs are valid numbers
+            if (isNaN(diameter) || isNaN(thickness) || isNaN(constant)) {
+                alert("Please enter valid numbers.");
+                return;
+            }
+            
+            // Perform the calculation
+            var sprueDiameter = constant * Math.sqrt(diameter * thickness);
+            
+            // Display the result
+            document.getElementById("resultLabel").innerText = "Sprue Diameter: " + sprueDiameter.toFixed(2);
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label, input, button {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sprue Diameter Calculator</h1>
+        <form onsubmit="event.preventDefault(); calculateSprueDiameter();">
+            <label for="diameterInput">Ring Diameter (d):</label>
+            <input type="number" id="diameterInput" step="0.01" required>
+            
+            <label for="thicknessInput">Ring Thickness (t):</label>
+            <input type="number" id="thicknessInput" step="0.01" required>
+            
+            <label for="constantInput">Alloy Constant (k):</label>
+            <input type="number" id="constantInput" step="0.01" required>
+            
+            <button type="submit">Calculate</button>
+        </form>
+        
+        <h2 id="resultLabel">Sprue Diameter: </h2>
+        
+        <h3>Alloy Constants</h3>
+        <table>
+            <tr>
+                <th>Alloy</th>
+                <th>Constant (k)</th>
+            </tr>
+            <tr>
+                <td>PtCo 950/50</td>
+                <td>0.65</td>
+            </tr>
+            <tr>
+                <td>18ct White Gold (12.5% Palladium)</td>
+                <td>0.52</td>
+            </tr>
+            <tr>
+                <td>18ct Yellow Gold</td>
+                <td>0.50</td>
+            </tr>
+            <tr>
+                <td>9ct Golds</td>
+                <td>0.42</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
