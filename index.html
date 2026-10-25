@@ -1,132 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprue Diameter Calculator</title>
-    <script>
-        // Function to calculate sprue diameter
-        function calculateSprueDiameter() {
-            // Get input values
-            var diameter = parseFloat(document.getElementById("diameterInput").value);
-            var thickness = parseFloat(document.getElementById("thicknessInput").value);
-            var constant = parseFloat(document.getElementById("constantInput").value);
-            
-            // Check if inputs are valid numbers
-            if (isNaN(diameter) || isNaN(thickness) || isNaN(constant)) {
-                alert("Please enter valid numbers.");
-                return;
-            }
-            
-            // Perform the calculation
-            var sprueDiameter = constant * Math.sqrt(diameter * thickness);
-            
-            // Display the result
-            document.getElementById("resultLabel").innerText = "Sprue Diameter: " + sprueDiameter.toFixed(2);
-        }
-    </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            max-width: 600px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
-            text-align: center;
-            color: #333;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label, input, button {
-            margin-bottom: 15px;
-        }
-        label {
-            font-weight: bold;
-        }
-        input, button {
-            padding: 10px;
-            font-size: 16px;
-        }
-        button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #555;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #333;
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10151b">
+  <title>Sprue Diameter Calculator | Workshop Hub</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10151b;
+      --panel: #191f27;
+      --panel-light: #202833;
+      --border: #303a46;
+      --text: #edf2f7;
+      --muted: #9ba8b7;
+      --accent: #53d6c3;
+      --accent-dark: #163e3b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 36px 20px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--accent-dark);
+      border: 1px solid #28645d;
+      color: var(--accent);
+      font-size: 19px;
+    }
+
+    .top-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .intro {
+      margin-bottom: 26px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .subtitle {
+      max-width: 620px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .panel {
+      padding: 26px;
+      margin-bottom: 22px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .step-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hint {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    input {
+      width: 100%;
+      min-height: 46px;
+      padding: 11px 12px;
+      background: #11171e;
+      color: var(--text);
+      border: 1px solid #3a4654;
+      border-radius: 8px;
+      font: inherit;
+      font-size: 15px;
+    }
+
+    input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-color: var(--accent);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    button {
+      min-height: 44px;
+      padding: 11px 20px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .primary-button {
+      background: var(--accent);
+      color: #10201e;
+    }
+
+    .primary-button:hover {
+      background: #76e4d4;
+    }
+
+    .secondary-button {
+      background: var(--panel-light);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .secondary-button:hover {
+      background: #2a3542;
+    }
+
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .result {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px;
+      margin-top: 22px;
+      background: #132a29;
+      border: 1px solid #28534e;
+      border-radius: 10px;
+    }
+
+    .result-label {
+      color: #b5cbc8;
+      font-size: 13px;
+    }
+
+    .result-value {
+      margin-top: 4px;
+      color: var(--accent);
+      font-size: clamp(24px, 4vw, 34px);
+      font-weight: 750;
+      letter-spacing: -0.035em;
+    }
+
+    .result-unit {
+      color: #b5cbc8;
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    th {
+      background: var(--panel-light);
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    td:last-child, th:last-child {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #202832;
+    }
+
+    .constant-button {
+      padding: 5px 9px;
+      min-height: 30px;
+      background: var(--accent-dark);
+      border-color: #28645d;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .note {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 650px) {
+      body {
+        padding: 22px 14px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .panel {
+        padding: 19px;
+      }
+
+      .top-label {
+        display: none;
+      }
+
+      .result {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Sprue Diameter Calculator</h1>
-        <form onsubmit="event.preventDefault(); calculateSprueDiameter();">
-            <label for="diameterInput">Ring Diameter (d):</label>
-            <input type="number" id="diameterInput" step="0.01" required>
-            
-            <label for="thicknessInput">Ring Thickness (t):</label>
-            <input type="number" id="thicknessInput" step="0.01" required>
-            
-            <label for="constantInput">Alloy Constant (k):</label>
-            <input type="number" id="constantInput" step="0.01" required>
-            
-            <button type="submit">Calculate</button>
-        </form>
-        
-        <h2 id="resultLabel">Sprue Diameter: </h2>
-        
-        <h3>Alloy Constants</h3>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">∅</div>
+        <span>WORKSHOP HUB</span>
+      </div>
+      <span class="top-label">Casting tools / Calculation</span>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">Technical calculator</p>
+      <h1>Sprue Diameter Calculator</h1>
+      <p class="subtitle">
+        Calculate a recommended sprue diameter using the ring diameter,
+        ring thickness and selected alloy constant.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <h2>Calculation inputs</h2>
+        <span class="step-label">01 / Parameters</span>
+      </div>
+
+      <form id="sprueForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="diameterInput">Ring diameter (d)</label>
+            <input
+              type="number"
+              id="diameterInput"
+              step="any"
+              min="0"
+              required
+              placeholder="e.g. 20"
+            >
+            <span class="hint">Enter diameter in mm</span>
+          </div>
+
+          <div class="field">
+            <label for="thicknessInput">Ring thickness (t)</label>
+            <input
+              type="number"
+              id="thicknessInput"
+              step="any"
+              min="0"
+              required
+              placeholder="e.g. 2.5"
+            >
+            <span class="hint">Enter thickness in mm</span>
+          </div>
+
+          <div class="field">
+            <label for="constantInput">Alloy constant (k)</label>
+            <input
+              type="number"
+              id="constantInput"
+              step="any"
+              min="0"
+              required
+              placeholder="e.g. 0.65"
+            >
+            <span class="hint">Use the reference table below</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="primary-button" type="submit">Calculate diameter</button>
+          <button class="secondary-button" type="reset">Reset inputs</button>
+        </div>
+      </form>
+
+      <div class="result" aria-live="polite">
+        <div>
+          <div class="result-label">Calculated sprue diameter</div>
+          <div class="result-value" id="resultLabel">—</div>
+        </div>
+        <div class="result-unit">Result in mm*</div>
+      </div>
+      <p class="note">
+        *The result follows the existing formula and assumes the inputs are
+        expressed in millimetres. Confirm suitability against your workshop
+        casting practice.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <h2>Alloy constants</h2>
+        <span class="step-label">02 / Reference</span>
+      </div>
+
+      <div class="table-wrap">
         <table>
+          <thead>
             <tr>
-                <th>Alloy</th>
-                <th>Constant (k)</th>
+              <th scope="col">Alloy</th>
+              <th scope="col">Constant (k)</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PtCo 950/50</td>
+              <td>0.65</td>
+              <td><button class="constant-button" type="button" data-constant="0.65">Use value</button></td>
             </tr>
             <tr>
-                <td>PtCo 950/50</td>
-                <td>0.65</td>
+              <td>18ct White Gold (12.5% Palladium)</td>
+              <td>0.52</td>
+              <td><button class="constant-button" type="button" data-constant="0.52">Use value</button></td>
             </tr>
             <tr>
-                <td>18ct White Gold (12.5% Palladium)</td>
-                <td>0.52</td>
+              <td>18ct Yellow Gold</td>
+              <td>0.50</td>
+              <td><button class="constant-button" type="button" data-constant="0.50">Use value</button></td>
             </tr>
             <tr>
-                <td>18ct Yellow Gold</td>
-                <td>0.50</td>
+              <td>9ct Golds</td>
+              <td>0.42</td>
+              <td><button class="constant-button" type="button" data-constant="0.42">Use value</button></td>
             </tr>
-            <tr>
-                <td>9ct Golds</td>
-                <td>0.42</td>
-            </tr>
+          </tbody>
         </table>
-    </div>
+      </div>
+      <p class="note">
+        Select “Use value” to load an alloy constant into the calculation.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <span>Workshop Hub · Sprue Diameter Calculator</span>
+      <span>Check results against your established process.</span>
+    </footer>
+  </main>
+
+  <script>
+    function calculateSprueDiameter() {
+      const diameter = parseFloat(document.getElementById("diameterInput").value);
+      const thickness = parseFloat(document.getElementById("thicknessInput").value);
+      const constant = parseFloat(document.getElementById("constantInput").value);
+      const result = document.getElementById("resultLabel");
+
+      if (
+        !Number.isFinite(diameter) ||
+        !Number.isFinite(thickness) ||
+        !Number.isFinite(constant) ||
+        diameter <= 0 ||
+        thickness <= 0 ||
+        constant < 0
+      ) {
+        result.textContent = "Check your inputs";
+        return;
+      }
+
+      const sprueDiameter = constant * Math.sqrt(diameter * thickness);
+      result.textContent = sprueDiameter.toFixed(2);
+    }
+
+    document.getElementById("sprueForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      calculateSprueDiameter();
+    });
+
+    document.getElementById("sprueForm").addEventListener("reset", function() {
+      document.getElementById("resultLabel").textContent = "—";
+    });
+
+    document.querySelectorAll("[data-constant]").forEach(function(button) {
+      button.addEventListener("click", function() {
+        document.getElementById("constantInput").value = button.dataset.constant;
+      });
+    });
+  </script>
 </body>
 </html>
