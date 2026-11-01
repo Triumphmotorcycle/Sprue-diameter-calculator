@@ -331,6 +331,34 @@
         gap: 4px;
       }
     }
+  
+    /* TJ Gold & Diamond shared calculator identity */
+    :root { color-scheme: light; --bg:#f5f2ec; --panel:#fbfaf7; --panel-light:#f0ece4; --border:#e4ded4; --text:#17191d; --muted:#77766f; --accent:#d2a654; --accent-dark:#302a1e; }
+    body { background:var(--bg); color:var(--text); font-family:"DM Sans",Inter,"Segoe UI",Arial,sans-serif; }
+    .topbar { padding:16px 20px; margin-bottom:30px; background:#17191d; border:1px solid #d2a654; border-radius:14px; box-shadow:0 10px 26px rgba(31,28,22,.09); }
+    .brand { color:#f7f1e7; gap:16px; }
+    .brand-logo { display:block; width:160px; height:66px; object-fit:contain; background:#17191d; border-radius:5px; }
+    .top-label { color:#c5c0b7; }
+    .eyebrow { color:#936b27; }
+    .panel { background:#fbfaf7; border-color:#e4ded4; box-shadow:0 5px 18px rgba(31,28,22,.035); }
+    input, select { background:#fffefa; color:#17191d; border-color:#d8d1c5; }
+    input:focus, select:focus { outline-color:#d2a654; border-color:#d2a654; }
+    .primary-button { background:#d2a654; color:#17191d; }
+    .primary-button:hover { background:#e2bd70; }
+    .secondary-button { background:#f0ece4; border-color:#e4ded4; color:#302a1e; }
+    .secondary-button:hover { background:#e9e1d3; }
+    .result { background:#f4ead6; border-color:#d8bd86; }
+    .result-label,.result-unit,.result-item strong,.result-item small { color:#6f624b; }
+    .result-value,.result-heading { color:#936b27; }
+    .result-item { background:rgba(255,255,255,.55); border-color:#e0c995; }
+    .result-item span { color:#17191d; }
+    .table-wrap { border-color:#e4ded4; }
+    th { background:#f0ece4; color:#77766f; }
+    tbody tr:hover { background:#f7f3eb; }
+    .constant-button { background:#f4ead6; border-color:#d8bd86; color:#76551f; }
+    .footer { color:#77766f; }
+    @media(max-width:650px) { .topbar { padding:13px 14px; } .brand-logo { width:130px; height:55px; } }
+   
   </style>
 </head>
 
@@ -338,8 +366,8 @@
   <main class="page">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark" aria-hidden="true">∅</div>
-        <span>WORKSHOP HUB</span>
+        <img class="brand-logo" src="https://raw.githubusercontent.com/Triumphmotorcycle/tj-alloying-calculator/main/TJ-Gold-and-Diamond-Logo.png" alt="TJ Gold & Diamond">
+        <span>TJ GOLD & DIAMOND</span>
       </div>
       <span class="top-label">Casting tools / Calculation</span>
     </header>
