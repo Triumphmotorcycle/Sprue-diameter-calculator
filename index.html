@@ -332,32 +332,50 @@
       }
     }
   
-    /* TJ Gold & Diamond shared calculator identity */
-    :root { color-scheme: light; --bg:#f5f2ec; --panel:#fbfaf7; --panel-light:#f0ece4; --border:#e4ded4; --text:#17191d; --muted:#77766f; --accent:#d2a654; --accent-dark:#302a1e; }
-    body { background:var(--bg); color:var(--text); font-family:"DM Sans",Inter,"Segoe UI",Arial,sans-serif; }
-    .topbar { padding:16px 20px; margin-bottom:30px; background:#17191d; border:1px solid #d2a654; border-radius:14px; box-shadow:0 10px 26px rgba(31,28,22,.09); }
-    .brand { color:#f7f1e7; gap:16px; }
-    .brand-logo { display:block; width:160px; height:66px; object-fit:contain; background:#17191d; border-radius:5px; }
-    .top-label { color:#c5c0b7; }
-    .eyebrow { color:#936b27; }
-    .panel { background:#fbfaf7; border-color:#e4ded4; box-shadow:0 5px 18px rgba(31,28,22,.035); }
-    input, select { background:#fffefa; color:#17191d; border-color:#d8d1c5; }
-    input:focus, select:focus { outline-color:#d2a654; border-color:#d2a654; }
-    .primary-button { background:#d2a654; color:#17191d; }
-    .primary-button:hover { background:#e2bd70; }
-    .secondary-button { background:#f0ece4; border-color:#e4ded4; color:#302a1e; }
-    .secondary-button:hover { background:#e9e1d3; }
-    .result { background:#f4ead6; border-color:#d8bd86; }
-    .result-label,.result-unit,.result-item strong,.result-item small { color:#6f624b; }
-    .result-value,.result-heading { color:#936b27; }
-    .result-item { background:rgba(255,255,255,.55); border-color:#e0c995; }
-    .result-item span { color:#17191d; }
-    .table-wrap { border-color:#e4ded4; }
-    th { background:#f0ece4; color:#77766f; }
-    tbody tr:hover { background:#f7f3eb; }
-    .constant-button { background:#f4ead6; border-color:#d8bd86; color:#76551f; }
-    .footer { color:#77766f; }
-    @media(max-width:650px) { .topbar { padding:13px 14px; } .brand-logo { width:130px; height:55px; } }
+    
+/* TJ Gold & Diamond — rebuilt light theme with explicit contrast */
+:root {
+ color-scheme:light;
+ --bg:#f5f2ec; --panel:#ffffff; --panel-light:#f4f0e8;
+ --border:#ded8cd; --text:#202020; --muted:#5e5a53;
+ --accent:#b58a3b; --accent-dark:#76551f;
+}
+html,body { background:#f5f2ec!important; color:#202020!important; }
+body { font-family:Inter,"Segoe UI",Arial,sans-serif!important; }
+.page { color:#202020!important; }
+.topbar { display:flex!important; align-items:center!important; justify-content:space-between!important; flex-wrap:wrap!important; padding:16px 20px!important; margin-bottom:30px!important; background:#fff!important; border:1px solid #ded8cd!important; border-radius:12px!important; box-shadow:0 4px 16px rgba(30,25,15,.045)!important; }
+.brand { display:flex!important; align-items:center!important; gap:14px!important; color:#202020!important; }
+.brand-logo { display:block!important; width:190px!important; height:78px!important; max-height:78px!important; object-fit:contain!important; object-position:left center!important; background:#fff!important; filter:none!important; border:0!important; border-radius:0!important; }
+.brand-mark { display:none!important; }
+.brand span { color:#202020!important; }
+.top-label,.step-label,.hint,.subtitle,.note,.footer { color:#5e5a53!important; }
+.intro { color:#202020!important; }
+.eyebrow { color:#76551f!important; }
+h1,h2,h3,.panel-heading h2,.setting-group h3 { color:#202020!important; }
+.panel,.setting-group,.flask-entry { background:#fff!important; color:#202020!important; border:1px solid #ded8cd!important; border-radius:12px!important; box-shadow:0 3px 14px rgba(30,25,15,.025)!important; }
+label { color:#292722!important; }
+input,select,textarea { background:#fff!important; color:#202020!important; border:1px solid #cfc8bc!important; }
+input::placeholder,textarea::placeholder { color:#777168!important; opacity:1!important; }
+input:focus,select:focus,textarea:focus { outline:2px solid #b58a3b!important; outline-offset:1px!important; border-color:#b58a3b!important; }
+.primary-button { background:#b58a3b!important; color:#171717!important; border-color:#a47a30!important; }
+.primary-button:hover { background:#c8a45f!important; }
+.secondary-button { background:#f4f0e8!important; color:#292722!important; border:1px solid #d8d0c3!important; }
+.secondary-button:hover { background:#eae3d6!important; }
+.remove-button { background:#fff1ef!important; color:#8b2e28!important; border:1px solid #e7c7c2!important; }
+.result { background:#f7f0e2!important; color:#202020!important; border:1px solid #d8c397!important; }
+.result-heading,.result-label,.result-unit,.result-empty { color:#51432c!important; }
+.result-value,.result-heading { color:#76551f!important; }
+.result-item { background:#fff!important; color:#202020!important; border:1px solid #e1d3b7!important; }
+.result-item strong,.result-item small { color:#514b40!important; }
+.result-item span { color:#202020!important; }
+.table-wrap { background:#fff!important; border-color:#ded8cd!important; }
+table,tbody,tr,td { color:#292722!important; }
+th { background:#f4f0e8!important; color:#514b40!important; }
+tbody tr:hover { background:#faf7f0!important; }
+.constant-button { background:#f7f0e2!important; border-color:#d8c397!important; color:#76551f!important; }
+[hidden] { display:none!important; }
+@media(max-width:650px){ .topbar{padding:13px 14px!important;} .brand-logo{width:155px!important;height:64px!important;} }
+
    
   </style>
 </head>
